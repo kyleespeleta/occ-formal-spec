@@ -10,6 +10,7 @@ Civilization-scale coordination faces a fundamental bottleneck: the finite rate 
 
 ## Paper
 - `OCC_Formal_Spec_and_Falsification_Protocol.pdf`
+- - How to test: [HOW_TO_TEST.md](HOW_TO_TEST.md)
 
 ## What this is
 This repository provides the **canonical technical specification** of OCC:
