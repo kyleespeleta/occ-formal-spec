@@ -27,7 +27,7 @@ This repository provides the **canonical technical specification** of OCC:
 
 ## How to cite
 **Suggested citation (update DOI/URL when available):**
-> Espeleta, Kyle. *Operator Closure Constraint (OCC): Formal Specification and Falsification Protocol.* Preprint, 2025. URL/DOI: TBD.
+> Espeleta, Kyle. *Operator Closure Constraint (OCC): Formal Specification and Falsification Protocol.* Preprint, 2025. URL/DOI:(https://doi.org/10.5281/zenodo.17973990)
 
 ## Tool-use disclosure
 Text-to-text generative AI was used to assist drafting and editing. The author reviewed and takes full responsibility for all content and references.
