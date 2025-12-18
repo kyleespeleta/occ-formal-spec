@@ -6,7 +6,7 @@
 **Revision:** 2025-12-17
 
 ## Abstract
-The Operator Closure Constraint (OCC) is a domain-general constraint mechanism for consequence-bearing coordination systems. It states that durable settlement of obligations is bounded by a finite closure channel at the consequence interface, implemented by bounded human decision-makers operating under credible contestability. When required uncertainty reduction persistently exceeds this channel, the conserved remainder reappears as return-work (reopenings/corrections), tail thickening, off-ledger displacement, auditability/actuation collapse, and slow-variable hysteresis. This repository hosts the canonical technical preprint and supporting materials.
+Civilization-scale coordination faces a fundamental bottleneck: the finite rate at which human decision-makers can resolve uncertain, consequential tasks under contestability. This preprint formalizes this bottleneck as the Operator Closure Constraint (OCC), a domain-general constraint mechanism for consequence-bearing coordination systems. OCC states that durable settlement of obligations is bounded by a finite closure channel at the consequence interface. When required uncertainty reduction persistently exceeds this channel, the conserved remainder reappears as return-work (reopenings/corrections), tail thickening, off-ledger displacement, auditability/actuation collapse, and slow-variable hysteresis. This repository hosts the canonical technical preprint and supporting materials.
 
 ## Paper
 - `OCC_Formal_Spec_and_Falsification_Protocol.pdf`
@@ -48,5 +48,4 @@ This work is intended to be released under **CC BY 4.0** (reuse permitted with a
 
 ## Contact
 For critique, replication attempts, counterexamples, or collaboration: **closure.rate@pm.me**
-# occ-formal-spec
-Preprint and supporting materials for ‘Operator Closure Constraint (OCC): Formal Specification and Falsification Protocol’—a cybernetic/queueing mechanism spec with an adversarial empirical test charter
+
