@@ -16,6 +16,10 @@ Large-scale coordination often fails for a simple reason: the rate at which obli
 ## Paper
 - `OCC_Formal_Spec_and_Falsification_Protocol.pdf`  
 - How to test: [HOW_TO_TEST.md](HOW_TO_TEST.md)
+- 
+- ## Reproducible tests
+- EOIR executed case (Tier 1): [tests/eoir/RESULTS.md](tests/eoir/RESULTS.md)
+
 
 ## What this is
 This repository provides the **canonical technical specification** of OCC:
