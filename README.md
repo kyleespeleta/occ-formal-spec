@@ -14,9 +14,19 @@ Operator Closure Constraint (OCC) is a falsifiable throughput constraint for con
 ## Executed cases
 
 - EOIR — Tier 1a  
-  Limitation: **no q(t;T), no μ_d**
+  Limitation: **no q(t;T), no μ_d**  
+  Writeup: `tests/eoir/RESULTS.md`
+  Artifacts: `tests/eoir/raw/` (sources), `tests/eoir/derived/` (tables), `tests/eoir/outputs/` (plots)  
+  Definitions lock: `docs/DEFINITIONS_LOCK.md`
 
+## License
 
-For critique, replication attempts, counterexamples, or collaboration: **closure.rate@pm.me**
+- Papers/text: `LICENSE-CC-BY-4.0.txt`  
+- Code: `LICENSE-CODE-MIT.txt`
+
+## Contact
+
+For critique, replication attempts, counterexamples, or collaboration: closure.rate@pm.me
+
 
 
