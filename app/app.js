@@ -10,7 +10,9 @@ const state = {
 const sampleUrl = 'data/sample_metrics.json';
 
 function formatNumber(value, digits = 1) {
-  const fixed = Number.parseFloat(value).toFixed(digits);
+  const n = Number(value);
+  if (!Number.isFinite(n)) return '—';
+  const fixed = n.toFixed(digits);
   return fixed.replace(/\.0+$/, '');
 }
 
@@ -176,7 +178,11 @@ function renderChart(series) {
       tooltip: {
         callbacks: {
           label: (context) => {
-            const value = formatNumber(context.parsed.y, 1);
+            const y = context.parsed?.y;
+            if (y === null || y === undefined || Number.isNaN(y)) {
+              return `${context.dataset.label}: —`;
+            }
+            const value = formatNumber(y, 1);
             if (context.dataset.label.startsWith('μ_d')) {
               const point = series[context.dataIndex];
               const cohort = point?.cohort_week ? ` (cohort ${point.cohort_week})` : '';
