@@ -4,6 +4,7 @@ const state = {
   chart: null,
   horizonDays: 30,
   synthetic: false,
+  lagPeriods: 0,
 };
 
 const sampleUrl = 'data/sample_metrics.json';
@@ -73,14 +74,17 @@ function updateSummaryFromInputs() {
 
 function buildDerivedSeries(rawSeries, horizonDays, periodDays) {
   if (!rawSeries.length || !periodDays || periodDays <= 0) return [];
-  const lagPeriods = Math.max(1, Math.round(horizonDays / periodDays));
+  const lagPeriods = Math.max(1, Math.ceil(horizonDays / periodDays));
+  state.lagPeriods = lagPeriods;
 
   return rawSeries.map((point, idx) => {
     const exitIdx = idx - lagPeriods;
     const mu_d_exit = exitIdx >= 0 ? rawSeries[exitIdx].mu_d : null;
+    const cohort_week = exitIdx >= 0 ? rawSeries[exitIdx].week : null;
     return {
       ...point,
       mu_d_exit,
+      cohort_week,
     };
   });
 }
@@ -171,7 +175,15 @@ function renderChart(series) {
       },
       tooltip: {
         callbacks: {
-          label: (context) => `${context.dataset.label}: ${formatNumber(context.parsed.y, 1)}`,
+          label: (context) => {
+            const value = formatNumber(context.parsed.y, 1);
+            if (context.dataset.label.startsWith('μ_d')) {
+              const point = series[context.dataIndex];
+              const cohort = point?.cohort_week ? ` (cohort ${point.cohort_week})` : '';
+              return `${context.dataset.label}: ${value}${cohort}`;
+            }
+            return `${context.dataset.label}: ${value}`;
+          },
         },
       },
     },
@@ -248,7 +260,7 @@ function recomputeAndRender() {
 
 function bootstrap() {
   document.getElementById('loadSample').addEventListener('click', loadSampleData);
-  document.getElementById('recalc').addEventListener('click', updateSummaryFromInputs);
+  document.getElementById('recalc').addEventListener('click', recomputeAndRender);
   document.getElementById('horizon').addEventListener('change', recomputeAndRender);
   document.getElementById('periodDays').addEventListener('change', recomputeAndRender);
   loadSampleData();
