@@ -3,12 +3,13 @@
 **Author:** Kyle Espeleta  
 **Contact:** closure.rate@pm.me  
 **Status:** Preprint  
-**Revision:** 2025-12-18  
+**Revision:** 2025-12-20  
 
-**Zenodo DOIs (canonical):**  
-- Document 1 — OCC: The First Principle: https://doi.org/10.5281/zenodo.17980437  
-- Document 2 — OCC: Formal Specification and Falsification Protocol: https://doi.org/10.5281/zenodo.17980648  
-- Document 3 — Closure-Pathogen Postulates (CHP) v1.1: https://doi.org/10.5281/zenodo.17980810  
+**Zenodo DOIs (canonical; always resolve to latest versions):**  
+- Document 1 — OCC: The First Principle: https://doi.org/10.5281/zenodo.17973989  
+- Document 2 — OCC: Formal Specification and Falsification Protocol: https://doi.org/10.5281/zenodo.17980647  
+- Document 3 — Closure-Pathogen Postulates (CHP): https://doi.org/10.5281/zenodo.17980809  
+- Map — OCC Framework Map: https://doi.org/10.5281/zenodo.17994480  
 
 ## Abstract
 Large-scale coordination often fails for a simple reason: the rate at which obligations are created can exceed the rate at which they can be settled *durably* under real accountability and challenge. This preprint formalizes that bottleneck as the Operator Closure Constraint (OCC), a domain-general constraint on consequence-bearing systems mediated by accountable, contestable human determinations. At any declared consequence boundary, durable settlement is bounded by a finite closure channel. When uncertainty-reduction demands persistently outpace effective closure capacity—under drift, opacity, coupling, or required fidelity—the unmet remainder is conserved in boundary accounting and reappears as measurable outputs: return-work (reopens/corrections), thickening delays and tails, displacement of obligations off-ledger or into adjacent ledgers/client burden, degradation of auditability or actuation, and hysteresis after saturation. This repository hosts the canonical preprint and supporting materials.
@@ -16,10 +17,9 @@ Large-scale coordination often fails for a simple reason: the rate at which obli
 ## Paper
 - `OCC_Formal_Spec_and_Falsification_Protocol.pdf`  
 - How to test: [HOW_TO_TEST.md](HOW_TO_TEST.md)
-- 
-- ## Reproducible tests
-- EOIR executed case (Tier 1): [tests/eoir/RESULTS.md](tests/eoir/RESULTS.md)
 
+## Reproducible tests
+- EOIR executed case (Tier 1): [tests/eoir/RESULTS.md](tests/eoir/RESULTS.md)
 
 ## What this is
 This repository provides the **canonical technical specification** of OCC:
@@ -37,7 +37,7 @@ This repository provides the **canonical technical specification** of OCC:
 
 ## How to cite
 **Suggested citation:**
-> Espeleta, Kyle. *Operator Closure Constraint (OCC): Formal Specification and Falsification Protocol.* Preprint, 2025. https://doi.org/10.5281/zenodo.17980648
+> Espeleta, Kyle. *Operator Closure Constraint (OCC): Formal Specification and Falsification Protocol.* Preprint, 2025. https://doi.org/10.5281/zenodo.17980647
 
 ## Tool-use disclosure
 Text-to-text generative AI was used to assist drafting and editing. The author reviewed and takes full responsibility for all content and references.
