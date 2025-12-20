@@ -2,6 +2,7 @@
   "boundary": "Institutional Decision Cell — Eligibility and Appeals",
   "horizon_days": 30,
   "fidelity": "F1 — durable settlement must withstand 30-day contest",
+  "synthetic": true,
   "series": [
     {"week": "2025-01-05", "lambda": 120, "mu_a": 108, "q": 0.74, "backlog": 410, "drift": 18, "b_req": 6.5, "capacity": 750},
     {"week": "2025-01-12", "lambda": 130, "mu_a": 112, "q": 0.7, "backlog": 438, "drift": 22, "b_req": 6.5, "capacity": 750},
@@ -17,6 +18,7 @@
     {"week": "2025-03-23", "lambda": 150, "mu_a": 145, "q": 0.64, "backlog": 690, "drift": 24, "b_req": 7.0, "capacity": 785}
   ],
   "annotations": [
+    "Synthetic demo dataset. Not real-world measurements.",
     "Each point is a weekly cohort with a 30-day reopen horizon.",
     "C_eff(t) is approximated by capacity minus drift for the week.",
     "Backlog is visible on-ledger unresolved inventory L(t); displacement is out-of-scope here."

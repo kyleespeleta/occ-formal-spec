@@ -50,6 +50,23 @@ body {
   flex-wrap: wrap;
 }
 
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(192, 132, 252, 0.12);
+  color: var(--text);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.hidden {
+  display: none;
+}
+
 .hero-card {
   background: var(--panel);
   border: 1px solid var(--border);
@@ -213,6 +230,7 @@ a.ghost:hover {
 .blue { background: var(--accent-3); }
 .purple { background: var(--accent-4); }
 .orange { background: var(--accent-2); }
+.pink { background: #f9a8d4; }
 
 .checklist {
   padding-left: 1.1rem;
@@ -231,6 +249,10 @@ footer {
   border-top: 1px solid var(--border);
   color: var(--muted);
   background: #0a0b11;
+}
+
+.lag-hint {
+  margin-top: 0.5rem;
 }
 
 @media (max-width: 1080px) {

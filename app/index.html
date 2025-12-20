@@ -22,6 +22,7 @@
       </p>
       <div class="hero-actions">
         <button id="loadSample" class="primary">Load sample dataset</button>
+        <span id="sampleBadge" class="badge hidden">Sample data (synthetic)</span>
         <a class="ghost" href="https://doi.org/10.5281/zenodo.17973989" target="_blank" rel="noreferrer">Read the First Principle</a>
       </div>
     </div>
@@ -35,6 +36,10 @@
         <label>
           Contestability horizon (days)
           <input id="horizon" type="number" min="1" value="30" />
+        </label>
+        <label>
+          Period length (days) for each data point
+          <input id="periodDays" type="number" min="1" value="7" />
         </label>
         <label>
           Declared fidelity statement
@@ -104,9 +109,10 @@
           <div class="metric">
             <p class="eyebrow">Exceedance remainder E(t)</p>
             <h3 id="exceedanceOut">—</h3>
-            <p class="hint">max(0, u_drift + λ·b_req − C)</p>
+            <p class="hint">Verification-demand exceedance (same units as C): max(0, u_drift + λ·b_req − C)</p>
           </div>
         </div>
+        <p class="hint lag-hint">Durability q(t;T) is measured after the horizon T. The plot uses cohort week (t−T).</p>
       </div>
 
       <div class="panel">
@@ -116,12 +122,13 @@
             <h2>Flows, durability, and backlog</h2>
           </div>
           <div class="legend">
-            <span class="chip green"></span> μ_d(t;T) &nbsp; <span class="chip blue"></span> μ_a(t) &nbsp;
+            <span class="chip green"></span> μ_d(t−T;T) &nbsp; <span class="chip blue"></span> μ_a(t) &nbsp;
             <span class="chip purple"></span> λ(t) &nbsp; <span class="chip orange"></span> L(t)
+            <span class="chip pink"></span> μ̄_d frontier
           </div>
         </div>
         <canvas id="flowChart" height="140"></canvas>
-        <p class="hint">Hinge signature: if μ_a rises while μ_d stagnates and ρ_gen rises, durability is collapsing.</p>
+        <p class="hint">Hinge signature: if μ_a rises while μ_d(t−T;T) stagnates and ρ_gen rises, durability is collapsing. μ̄_d shows the rate–fidelity frontier.</p>
       </div>
     </section>
 

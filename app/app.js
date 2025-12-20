@@ -1,12 +1,16 @@
 const state = {
+  rawSeries: [],
   series: [],
   chart: null,
+  horizonDays: 30,
+  synthetic: false,
 };
 
 const sampleUrl = 'data/sample_metrics.json';
 
 function formatNumber(value, digits = 1) {
-  return Number.parseFloat(value).toFixed(digits).replace(/\.0+$/, '.0');
+  const fixed = Number.parseFloat(value).toFixed(digits);
+  return fixed.replace(/\.0+$/, '');
 }
 
 function computeSeriesMetrics(point) {
@@ -67,19 +71,34 @@ function updateSummaryFromInputs() {
   }
 }
 
+function buildDerivedSeries(rawSeries, horizonDays, periodDays) {
+  if (!rawSeries.length || !periodDays || periodDays <= 0) return [];
+  const lagPeriods = Math.max(1, Math.round(horizonDays / periodDays));
+
+  return rawSeries.map((point, idx) => {
+    const exitIdx = idx - lagPeriods;
+    const mu_d_exit = exitIdx >= 0 ? rawSeries[exitIdx].mu_d : null;
+    return {
+      ...point,
+      mu_d_exit,
+    };
+  });
+}
+
 function renderChart(series) {
   const ctx = document.getElementById('flowChart');
   const labels = series.map((p) => p.week);
-  const muD = series.map((p) => p.mu_d);
+  const muD = series.map((p) => p.mu_d_exit);
   const muA = series.map((p) => p.mu_a);
   const lambda = series.map((p) => p.lambda);
   const backlog = series.map((p) => p.backlog);
+  const muBar = series.map((p) => p.mu_bar);
 
   const data = {
     labels,
     datasets: [
       {
-        label: 'μ_d(t;T) durable',
+        label: 'μ_d(t−T;T) durable',
         data: muD,
         borderColor: '#5eead4',
         backgroundColor: 'rgba(94, 234, 212, 0.1)',
@@ -113,6 +132,16 @@ function renderChart(series) {
         tension: 0.15,
         fill: true,
         yAxisID: 'y1',
+      },
+      {
+        label: 'μ̄_d frontier',
+        data: muBar,
+        borderColor: '#f9a8d4',
+        backgroundColor: 'rgba(249, 168, 212, 0.08)',
+        tension: 0.35,
+        fill: false,
+        borderDash: [6, 6],
+        yAxisID: 'y',
       },
     ],
   };
@@ -179,11 +208,17 @@ async function loadSampleData() {
       return enriched;
     });
 
-    state.series = annotatedSeries;
+    state.rawSeries = annotatedSeries;
+    state.synthetic = Boolean(payload.synthetic);
+    state.horizonDays = payload.horizon_days || 30;
 
     document.getElementById('boundaryName').value = payload.boundary || 'Declared boundary';
-    document.getElementById('horizon').value = payload.horizon_days || 30;
+    document.getElementById('horizon').value = state.horizonDays;
+    document.getElementById('periodDays').value = 7;
     document.getElementById('fidelity').value = payload.fidelity || '';
+
+    const badge = document.getElementById('sampleBadge');
+    badge.classList.toggle('hidden', !state.synthetic);
 
     const latest = annotatedSeries[annotatedSeries.length - 1];
     document.getElementById('capacity').value = latest.capacity ?? 0;
@@ -193,16 +228,29 @@ async function loadSampleData() {
     document.getElementById('durability').value = latest.q ?? 0;
     document.getElementById('lambda').value = latest.lambda ?? 0;
 
-    renderChart(annotatedSeries);
-    updateSummaryFromInputs();
+    recomputeAndRender();
   } catch (err) {
     console.error('Failed to load sample data', err);
   }
 }
 
+function recomputeAndRender() {
+  if (!state.rawSeries.length) return;
+  const horizonDays = Number.parseFloat(document.getElementById('horizon').value) || state.horizonDays;
+  const periodDays = Number.parseFloat(document.getElementById('periodDays').value) || 1;
+  state.horizonDays = horizonDays;
+
+  const derived = buildDerivedSeries(state.rawSeries, horizonDays, periodDays);
+  state.series = derived;
+  renderChart(derived);
+  updateSummaryFromInputs();
+}
+
 function bootstrap() {
   document.getElementById('loadSample').addEventListener('click', loadSampleData);
   document.getElementById('recalc').addEventListener('click', updateSummaryFromInputs);
+  document.getElementById('horizon').addEventListener('change', recomputeAndRender);
+  document.getElementById('periodDays').addEventListener('change', recomputeAndRender);
   loadSampleData();
 }
 
