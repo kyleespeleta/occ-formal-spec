@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OCC Boundary Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Operator Closure Constraint (OCC)</p>
+      <h1>Boundary Dashboard</h1>
+      <p class="lede">
+        Track a consequence boundary, keep definitions frozen, and watch for OCC signatures: hinge degradation,
+        tail thickening, return-work, and displacement.
+      </p>
+      <div class="hero-actions">
+        <button id="loadSample" class="primary">Load sample dataset</button>
+        <a class="ghost" href="https://doi.org/10.5281/zenodo.17973989" target="_blank" rel="noreferrer">Read the First Principle</a>
+      </div>
+    </div>
+    <div class="hero-card" id="boundaryCard">
+      <h3>Boundary declaration</h3>
+      <div class="boundary-grid">
+        <label>
+          Boundary name
+          <input id="boundaryName" type="text" value="" />
+        </label>
+        <label>
+          Contestability horizon (days)
+          <input id="horizon" type="number" min="1" value="30" />
+        </label>
+        <label>
+          Declared fidelity statement
+          <textarea id="fidelity" rows="2" placeholder="Example: F1 — durable settlement withstands 30-day contest">F1 — durable settlement withstands 30-day contest</textarea>
+        </label>
+      </div>
+    </div>
+  </header>
+
+  <main class="content">
+    <section class="grid">
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Rate–Fidelity calculator</p>
+            <h2>Capacity bound and hinge</h2>
+          </div>
+          <button id="recalc" class="primary ghost">Recalculate</button>
+        </div>
+        <div class="calc-grid">
+          <label>
+            Verification capacity C(t)
+            <input id="capacity" type="number" value="750" />
+          </label>
+          <label>
+            Drift/overhead u_drift(t)
+            <input id="drift" type="number" value="24" />
+          </label>
+          <label>
+            Required verification per obligation b_req(t)
+            <input id="breq" type="number" step="0.1" value="7" />
+          </label>
+          <label>
+            Attempted closure rate μ_a(t)
+            <input id="attempted" type="number" value="140" />
+          </label>
+          <label>
+            Durability fraction q(t;T)
+            <input id="durability" type="number" step="0.01" value="0.62" />
+          </label>
+          <label>
+            Initiation rate λ(t)
+            <input id="lambda" type="number" value="150" />
+          </label>
+        </div>
+        <div class="metric-row" id="calcSummary">
+          <div class="metric">
+            <p class="eyebrow">Effective capacity</p>
+            <h3 id="capacityOut">—</h3>
+            <p class="hint">C_eff(t) = max(0, C − u_drift)</p>
+          </div>
+          <div class="metric">
+            <p class="eyebrow">Sustainable μ̄_d(t;T)</p>
+            <h3 id="boundOut">—</h3>
+            <p class="hint">Rate–fidelity frontier: C_eff / b_req</p>
+          </div>
+          <div class="metric">
+            <p class="eyebrow">Durable settlement μ_d(t;T)</p>
+            <h3 id="durableOut">—</h3>
+            <p class="hint">Cohort: μ_a · q</p>
+          </div>
+          <div class="metric">
+            <p class="eyebrow">Return-work ρ_gen(t;T)</p>
+            <h3 id="returnOut">—</h3>
+            <p class="hint">Generated per cohort: μ_a − μ_d</p>
+          </div>
+          <div class="metric">
+            <p class="eyebrow">Exceedance remainder E(t)</p>
+            <h3 id="exceedanceOut">—</h3>
+            <p class="hint">max(0, u_drift + λ·b_req − C)</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Cohort series</p>
+            <h2>Flows, durability, and backlog</h2>
+          </div>
+          <div class="legend">
+            <span class="chip green"></span> μ_d(t;T) &nbsp; <span class="chip blue"></span> μ_a(t) &nbsp;
+            <span class="chip purple"></span> λ(t) &nbsp; <span class="chip orange"></span> L(t)
+          </div>
+        </div>
+        <canvas id="flowChart" height="140"></canvas>
+        <p class="hint">Hinge signature: if μ_a rises while μ_d stagnates and ρ_gen rises, durability is collapsing.</p>
+      </div>
+    </section>
+
+    <section class="grid two">
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Operational notes</p>
+            <h2>Observable checkpoints</h2>
+          </div>
+        </div>
+        <ul class="checklist" id="checklist">
+          <li><strong>Tier-0 validity:</strong> obligation identity, timestamps, reopen linkage, horizon set.</li>
+          <li><strong>Hinge:</strong> μ_a vs μ_d with ρ_gen = μ_a − μ_d.</li>
+          <li><strong>Tails:</strong> L(t) aging; p90/p95 or “% older than X.”</li>
+          <li><strong>Displacement:</strong> evidence for X(t) or adjacent-ledger spillover.</li>
+          <li><strong>Contestability:</strong> label Z(t) or mark Z-unknown.</li>
+        </ul>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Quick interpretations</p>
+            <h2>Reading the dashboard</h2>
+          </div>
+        </div>
+        <ol class="interpret">
+          <li>If μ_a > μ̄_d and μ_d < μ̄_d, forcing throughput is converting to return-work.</li>
+          <li>If L(t) rises with aging/tail thickening, exceedance pressure is unresolved.</li>
+          <li>If L(t) falls but external complaints/adjacent ledgers rise, suspect displacement.</li>
+          <li>Durability curves must be horizon-conditioned; a short-horizon uptick alone is not improvement.</li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>OCC is structural, not normative. Durable settlement requires auditable verification under contestability.</p>
+    <p class="hint">Use this dashboard as a boundary declaration aid. Freeze definitions before measuring outcomes.</p>
+  </footer>
+</body>
+</html>

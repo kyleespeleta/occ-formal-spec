@@ -11,6 +11,14 @@ Operator Closure Constraint (OCC) is a falsifiable throughput constraint for con
 - Durable Settlement Failure Modes in an AI-Augmented Prior Authorization System: https://doi.org/10.5281/zenodo.17994351  
 - OCC Application — The Techno-Solutionist Error: https://doi.org/10.5281/zenodo.17996206  
 
+## OCC boundary dashboard (local app)
+
+A lightweight dashboard lives in `app/` to help institutions declare a boundary, freeze definitions, and visualize OCC signatures (hinge, tails, backlog). It runs as a static page:
+
+1. Start a simple server from the repo root: `python -m http.server 8000`.
+2. Open http://localhost:8000/app/index.html.
+3. Click **Load sample dataset** to explore, then replace the inputs with your boundary definitions and measurements.
+
 ## Executed cases
 
 - EOIR — Tier 1a  
@@ -27,6 +35,5 @@ Operator Closure Constraint (OCC) is a falsifiable throughput constraint for con
 ## Contact
 
 For critique, replication attempts, counterexamples, or collaboration: closure.rate@pm.me
-
 
 
