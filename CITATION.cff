@@ -1,0 +1,7 @@
+cff-version: 1.2.0
+title: "Operator Closure Constraint (OCC) Framework"
+message: "If you use this work, cite the Zenodo DOIs listed in README."
+authors:
+  - family-names: Espeleta
+    given-names: Kyle
+license: CC-BY-4.0
