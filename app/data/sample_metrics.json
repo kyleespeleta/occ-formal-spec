@@ -1,0 +1,26 @@
+{
+  "boundary": "Institutional Decision Cell — Eligibility and Appeals",
+  "horizon_days": 30,
+  "fidelity": "F1 — durable settlement must withstand 30-day contest",
+  "synthetic": true,
+  "series": [
+    {"week": "2025-01-05", "lambda": 120, "mu_a": 108, "q": 0.74, "backlog": 410, "drift": 18, "b_req": 6.5, "capacity": 750},
+    {"week": "2025-01-12", "lambda": 130, "mu_a": 112, "q": 0.7, "backlog": 438, "drift": 22, "b_req": 6.5, "capacity": 750},
+    {"week": "2025-01-19", "lambda": 128, "mu_a": 116, "q": 0.69, "backlog": 465, "drift": 28, "b_req": 6.7, "capacity": 760},
+    {"week": "2025-01-26", "lambda": 135, "mu_a": 118, "q": 0.67, "backlog": 492, "drift": 26, "b_req": 6.7, "capacity": 760},
+    {"week": "2025-02-02", "lambda": 142, "mu_a": 124, "q": 0.64, "backlog": 528, "drift": 32, "b_req": 6.8, "capacity": 770},
+    {"week": "2025-02-09", "lambda": 147, "mu_a": 126, "q": 0.62, "backlog": 558, "drift": 33, "b_req": 6.8, "capacity": 770},
+    {"week": "2025-02-16", "lambda": 152, "mu_a": 129, "q": 0.61, "backlog": 592, "drift": 34, "b_req": 6.9, "capacity": 780},
+    {"week": "2025-02-23", "lambda": 155, "mu_a": 133, "q": 0.6, "backlog": 623, "drift": 35, "b_req": 6.9, "capacity": 780},
+    {"week": "2025-03-02", "lambda": 160, "mu_a": 135, "q": 0.59, "backlog": 660, "drift": 37, "b_req": 7.0, "capacity": 785},
+    {"week": "2025-03-09", "lambda": 158, "mu_a": 140, "q": 0.61, "backlog": 672, "drift": 30, "b_req": 7.0, "capacity": 785},
+    {"week": "2025-03-16", "lambda": 154, "mu_a": 142, "q": 0.62, "backlog": 684, "drift": 28, "b_req": 7.0, "capacity": 785},
+    {"week": "2025-03-23", "lambda": 150, "mu_a": 145, "q": 0.64, "backlog": 690, "drift": 24, "b_req": 7.0, "capacity": 785}
+  ],
+  "annotations": [
+    "Synthetic demo dataset. Not real-world measurements.",
+    "Each point is a weekly cohort with a 30-day reopen horizon.",
+    "C_eff(t) is approximated by capacity minus drift for the week.",
+    "Backlog is visible on-ledger unresolved inventory L(t); displacement is out-of-scope here."
+  ]
+}
