@@ -1,0 +1,10 @@
+timestamp: 2025-12-24T15:28:52Z
+git_commit: no git
+python_version: Python 3.11.2
+pip_freeze_sha256: 1b08614062c256b0d3f306ce287be9e1598aee7f16b31c2d6d58e18e17e99dac
+input_hashes:
+  bpi_incidents_ledger.csv: 258621f7621893df0f91fc440ccfbd1cc5787242e3c2b87051f3b2fbcb2ee6a7
+command: python3 occ_harness.py --ledger raw/bpi_incidents_ledger.csv --horizon_days 30 --window_days 90 --output_dir submission/derived
+output_hashes:
+  timeseries.csv: f9f81f69c9679b8bf23ab5569bc82fe15a8232976ae18fe2c9afeafff6830f3b
+  diagnostics.json: 4177a4eacb0edfdc741a5cc1cd3469788158b309bb5355ad3efe830074c198d6
