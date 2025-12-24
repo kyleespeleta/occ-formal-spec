@@ -50,3 +50,5 @@ Observability limits
 Tier-1 does not attempt driver separation or causal attribution. Any information not contained in the ledger, including external quality standards beyond the Completed marker, staffing, policy changes, or exogenous drivers, is treated as unobservable and excluded.
 
 
+
+
