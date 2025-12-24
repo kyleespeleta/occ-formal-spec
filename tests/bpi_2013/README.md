@@ -1,5 +1,3 @@
-Paste this as the full contents of tests/bpi_2013/README.md:
-
 # BPI 2013 Tier-1 OCC harness
 
 This directory contains a fully reproducible Tier-1 execution of the Operator Closure Constraint (OCC) measurement primitives on the BPI Challenge 2013 incident log. The goal is instrumentation validity and conservation-identity verification, not causal attribution.
